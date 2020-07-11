@@ -15,28 +15,37 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   seis = windowHeight / 6;
 
-  title = createP("Lamp");
-  title.position(-20, -100);
-  title.style('font-size', '500px');
+  title = createDiv("Lamp");
+  title.position(-20, seis*2);
+  title.style('translate',-100);
+  title.style('z-index', '-1');
+  title.style('font-size', '20vw');
   title.style('line-height', 0);
   title.style('color', '#696969');
   title.style('opacity', '0.5');
   title.style('font-family', 'ff-meta-web-pro');
   title.style('font-weight', '200');
   title.style('font-style', 'italic');
-  title.style('text-align', 'right');
   title.style('user-select', 'none');
 
-  title2 = createP("Generator");
-  title2.position(105, -40);
-  title2.style('font-size', '500px');
-  title.style('line-height', 0);
+  title2 = createDiv("Generator");
+  title2.parent(title);
+  title2.position(0, 0);
+  title2.style('font-size', '20vw');
+  title2.style ('line-height', 1.8);
+  title2.style('text-indent', '0.35em');
   title2.style('color', '#696969');
-  title2.style('opacity', '0.5');
+  title2.style('opacity', '1');
   title2.style('font-family', 'ff-meta-web-pro');
   title2.style('font-weight', '200');
   title2.style('font-style', 'italic');
   title2.style('user-select', 'none');
+
+  fill(150);
+  textSize(16);
+  textFont('Crimson Pro');
+  text("styleGAN trained on 1161 imgs of 20th Century\nlamp designs for 16500 steps",
+    windowWidth - 631, windowHeight - 90, 384, 256);
 
   inp = createInput('');
   inp.input(gotText);
@@ -50,13 +59,6 @@ function setup() {
     line(startL, 50, startL, windowHeight - 50);
     startL += 256;
   }
-
-  fill(150);
-  textSize(16);
-  textFont('Crimson Pro');
-  text("styleGAN trained on 1161 imgs of 20th Century\nlamp designs for 16500 steps",
-    1420, windowHeight - 90, 384, 256);
-
 
 }
 
