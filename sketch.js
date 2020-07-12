@@ -40,10 +40,10 @@ function setup() {
   title2.style('font-weight', '200');
   title2.style('font-style', 'italic');
   title2.style('user-select', 'none');
-  
+
   sub = createP("styleGAN trained on 1161 imgs of 20th Century");
   //sub.parent(title);
-  sub.position(1400, 960);
+  sub.position(1400, windowHeight - 100);
   //sub.style('font-size', '1vw');
   sub.style('line-height', 1.8);
   sub.style('text-indent', '0.35em');
@@ -52,10 +52,10 @@ function setup() {
   sub.style('font-weight', '16');
   sub.style('font-style', 'normal');
   sub.style('user-select', 'none');
-  
+
   sub2 = createP("lamp designs for 16500 steps");
   sub2.parent(sub);
-  sub2.position(0,5);
+  sub2.position(0, 5);
   sub2.style('line-height', 1.8);
   sub2.style('text-indent', '0.35em');
   sub2.style('color', '#696969');
@@ -68,7 +68,7 @@ function setup() {
   //textSize(16);
   //textFont('Crimson Pro');
   //text("styleGAN trained on 1161 imgs of 20th Century\nlamp designs for 16500 steps",
-    //windowWidth - 631, windowHeight - 90, 384, 256);
+  //windowWidth - 631, windowHeight - 90, 384, 256);
 
   inp = createInput('');
   inp.input(gotText);
