@@ -47,7 +47,7 @@ function setup() {
   //sub.style('font-size', '1vw');
   sub.style('line-height', 1.8);
   sub.style('text-indent', '0.35em');
-  sub.style('color', '#FFFFFF');
+  sub.style('color', '#696969');
   sub.style('font-family', 'Crimson Pro');
   sub.style('font-weight', '16');
   sub.style('font-style', 'normal');
@@ -58,17 +58,17 @@ function setup() {
   sub2.position(0,5);
   sub2.style('line-height', 1.8);
   sub2.style('text-indent', '0.35em');
-  sub2.style('color', '#FFFFFF');
+  sub2.style('color', '#696969');
   sub2.style('font-family', 'Crimson Pro');
   sub2.style('font-weight', '16');
   sub2.style('font-style', 'normal');
   sub2.style('user-select', 'none');
 
-  fill(150);
-  textSize(16);
-  textFont('Crimson Pro');
-  text("styleGAN trained on 1161 imgs of 20th Century\nlamp designs for 16500 steps",
-    windowWidth - 631, windowHeight - 90, 384, 256);
+  //fill(150);
+  //textSize(16);
+  //textFont('Crimson Pro');
+  //text("styleGAN trained on 1161 imgs of 20th Century\nlamp designs for 16500 steps",
+    //windowWidth - 631, windowHeight - 90, 384, 256);
 
   inp = createInput('');
   inp.input(gotText);
