@@ -43,7 +43,7 @@ function setup() {
 
   sub = createP("styleGAN trained on 1161 imgs of 20th Century");
   //sub.parent(title);
-  sub.position(1400, windowHeight - 100);
+  sub.position(windowWidth-650, windowHeight - 100);
   //sub.style('font-size', '1vw');
   sub.style('line-height', 1.8);
   sub.style('text-indent', '0.35em');
