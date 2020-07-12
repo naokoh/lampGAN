@@ -16,8 +16,8 @@ function setup() {
   seis = windowHeight / 6;
 
   title = createDiv("Lamp");
-  title.position(-20, seis*2);
-  title.style('translate',-100);
+  title.position(-20, seis * 2);
+  //title.style('translate', -100);
   title.style('z-index', '-1');
   title.style('font-size', '20vw');
   title.style('line-height', 0);
@@ -32,7 +32,7 @@ function setup() {
   title2.parent(title);
   title2.position(0, 0);
   title2.style('font-size', '20vw');
-  title2.style ('line-height', 1.8);
+  title2.style('line-height', 1.8);
   title2.style('text-indent', '0.35em');
   title2.style('color', '#696969');
   title2.style('opacity', '1');
@@ -40,6 +40,29 @@ function setup() {
   title2.style('font-weight', '200');
   title2.style('font-style', 'italic');
   title2.style('user-select', 'none');
+  
+  sub = createP("styleGAN trained on 1161 imgs of 20th Century");
+  //sub.parent(title);
+  sub.position(1400, 960);
+  //sub.style('font-size', '1vw');
+  sub.style('line-height', 1.8);
+  sub.style('text-indent', '0.35em');
+  sub.style('color', '#FFFFFF');
+  sub.style('font-family', 'Crimson Pro');
+  sub.style('font-weight', '16');
+  sub.style('font-style', 'normal');
+  sub.style('user-select', 'none');
+  
+  sub2 = createP("lamp designs for 16500 steps");
+  sub2.parent(sub);
+  sub2.position(0,5);
+  sub2.style('line-height', 1.8);
+  sub2.style('text-indent', '0.35em');
+  sub2.style('color', '#FFFFFF');
+  sub2.style('font-family', 'Crimson Pro');
+  sub2.style('font-weight', '16');
+  sub2.style('font-style', 'normal');
+  sub2.style('user-select', 'none');
 
   fill(150);
   textSize(16);
@@ -64,9 +87,10 @@ function setup() {
 
 function windowResized() {
   const css = getComputedStyle(canvas.parentElement),
-        marginWidth = round(float(css.marginLeft) + float(css.marginRight)),
-        marginHeight = round(float(css.marginTop) + float(css.marginBottom)),
-        w = windowWidth - marginWidth, h = windowHeight - marginHeight;
+    marginWidth = round(float(css.marginLeft) + float(css.marginRight)),
+    marginHeight = round(float(css.marginTop) + float(css.marginBottom)),
+    w = windowWidth - marginWidth,
+    h = windowHeight - marginHeight;
 
   resizeCanvas(w, h, true);
 }
@@ -86,76 +110,82 @@ function draw() {
 }
 
 
-  function gotText() {
-    seed = 0;
-    if (this.value() != "") {
-      let text = this.value()
-      for (let t = 0; t < text.length; t++) {
-        //print text in console
-        print(text[t].charCodeAt())
-        //below adds up keycode of all text input and puts it in seed
-        seed += int(text[t].charCodeAt())
-      }
-      // print(seed)
-      getImageFromRunway()
+function gotText() {
+  seed = 0;
+  if (this.value() != "") {
+    let text = this.value()
+    for (let t = 0; t < text.length; t++) {
+      //print text in console
+      print(text[t].charCodeAt())
+      //below adds up keycode of all text input and puts it in seed
+      seed += int(text[t].charCodeAt())
     }
+    // print(seed)
+    getImageFromRunway()
   }
+}
 
-  function getImageFromRunway() {
-    randomSeed(seed);
-    z = createZ(512)
-    const path = model;
-    const data = {
-      z: z,
-      truncation: truncation_value
-    };
-    // httpPost(path, 'json', data, gotImage, gotError);
+function getImageFromRunway() {
+  randomSeed(seed);
+  z = createZ(512)
+  const path = model;
+  const data = {
+    z: z,
+    truncation: truncation_value
+  };
+  // httpPost(path, 'json', data, gotImage, gotError);
 
-    if (!model.isAwake()) {
-      console.log('asleep') // this is a fake function for demonstration
-    } else {
-      model.query(data)
-        .then(result => gotImage(result));
-    }
+  if (!model.isAwake()) {
+    console.log('asleep') // this is a fake function for demonstration
+  } else {
+    model.query(data)
+      .then(result => gotImage(result));
   }
+}
 
-  function gotError(error) {
-    console.error(error);
-  }
+function gotError(error) {
+  console.error(error);
+}
 
-  function gotImage(result) {
-    i = createImg(result.image, imageReady);
-    i.hide();
-    i2 = createImg(result.image, imageReady2);
-    i2.hide();
-    i3 = createImg(result.image, imageReady3);
-    i3.hide();
-  }
+function gotImage(result) {
+  i = createImg(result.image, imageReady);
+  i.hide();
+  i2 = createImg(result.image, imageReady2);
+  i2.hide();
+  i3 = createImg(result.image, imageReady3);
+  i3.hide();
+}
 
-  function imageReady() {
-    
+function imageReady() {
+  //if (windowWidth <= 1918) {
+  //xImgPos = 1408;
+  //} else if ((windowWidth >= 1917) && (windowWidth <= 1662)) {
+  //xImgPos = 1152;
+  //}
+
   if (windowWidth <= 1918) {
     xImgPos = 1408;
   } else if ((windowWidth >= 1917) && (windowWidth <= 1662)) {
     xImgPos = 1152;
   }
-    
-    yImgPos = h - 512;
-    image(i, xImgPos, yImgPos, 512, 512);
-  }
 
-  function imageReady2() {
-    image(i2, xImgPos, yImgPos - 512, 512, 512);
-  }
 
-  function imageReady3() {
-    image(i2, xImgPos, yImgPos - 1024, 512, 512);
-  }
+  yImgPos = h - 512;
+  image(i, xImgPos, yImgPos, 512, 512);
+}
 
-  function createZ(v) {
-    let z = [];
-    for (let zi = 0; zi < v; zi++) {
-      z.push(random(-1, 1))
-    }
-    return z;
+function imageReady2() {
+  image(i2, xImgPos, yImgPos - 512, 512, 512);
+}
+
+function imageReady3() {
+  image(i2, xImgPos, yImgPos - 1024, 512, 512);
+}
+
+function createZ(v) {
+  let z = [];
+  for (let zi = 0; zi < v; zi++) {
+    z.push(random(-1, 1))
   }
+  return z;
+}
