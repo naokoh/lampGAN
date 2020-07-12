@@ -15,9 +15,22 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   seis = windowHeight / 6;
 
+  inp = createInput('');
+  inp.input(gotText);
+
+  strokeWeight(0.25);
+  stroke(0);
+  line(50, windowHeight - 150, windowWidth - 50, windowHeight - 150);
+
+  startL = 128;
+  for (let x = 0; x < w; x++) {
+    line(startL, 50, startL, windowHeight - 50);
+    startL += 256;
+  }
+
   title = createDiv("Lamp");
-  title.position(-20, seis * 2);
-  //title.style('translate', -100);
+  title.position(-20, seis*2);
+  title.style('translate',-100);
   title.style('z-index', '-1');
   title.style('font-size', '20vw');
   title.style('line-height', 0);
@@ -32,7 +45,7 @@ function setup() {
   title2.parent(title);
   title2.position(0, 0);
   title2.style('font-size', '20vw');
-  title2.style('line-height', 1.8);
+  title2.style ('line-height', 1.8);
   title2.style('text-indent', '0.35em');
   title2.style('color', '#696969');
   title2.style('opacity', '1');
@@ -41,58 +54,13 @@ function setup() {
   title2.style('font-style', 'italic');
   title2.style('user-select', 'none');
 
-  sub = createP("styleGAN trained on 1161 imgs of 20th Century");
-  //sub.parent(title);
-  sub.position(windowWidth-650, windowHeight - 100);
-  //sub.style('font-size', '1vw');
-  sub.style('line-height', 1.8);
-  sub.style('text-indent', '0.35em');
-  sub.style('color', '#696969');
-  sub.style('font-family', 'Crimson Pro');
-  sub.style('font-weight', '16');
-  sub.style('font-style', 'normal');
-  sub.style('user-select', 'none');
+  fill(150);
+  textSize(16);
+  textFont('Crimson Pro');
+  text("styleGAN trained on 1161 imgs of 20th Century\nlamp designs for 16500 steps",
+    windowWidth - 631, windowHeight - 90, 384, 256);
 
-  sub2 = createP("lamp designs for 16500 steps");
-  sub2.parent(sub);
-  sub2.position(0, 5);
-  sub2.style('line-height', 1.8);
-  sub2.style('text-indent', '0.35em');
-  sub2.style('color', '#696969');
-  sub2.style('font-family', 'Crimson Pro');
-  sub2.style('font-weight', '16');
-  sub2.style('font-style', 'normal');
-  sub2.style('user-select', 'none');
 
-  //fill(150);
-  //textSize(16);
-  //textFont('Crimson Pro');
-  //text("styleGAN trained on 1161 imgs of 20th Century\nlamp designs for 16500 steps",
-  //windowWidth - 631, windowHeight - 90, 384, 256);
-
-  inp = createInput('');
-  inp.input(gotText);
-
-  strokeWeight(0.25);
-  stroke(0);
-  line(50, windowHeight - 150, windowWidth - 50, windowHeight - 150);
-
-  startL = 128;
-  for (let x = 0; x < w; x++) {
-    line(startL, 50, startL, windowHeight - 50);
-    startL += 256;
-  }
-
-}
-
-function windowResized() {
-  const css = getComputedStyle(canvas.parentElement),
-    marginWidth = round(float(css.marginLeft) + float(css.marginRight)),
-    marginHeight = round(float(css.marginTop) + float(css.marginBottom)),
-    w = windowWidth - marginWidth,
-    h = windowHeight - marginHeight;
-
-  resizeCanvas(w, h, true);
 }
 
 function draw() {
@@ -107,6 +75,7 @@ function draw() {
   inp.style('font-family', 'Crimson Pro');
   inp.style('font-weight', '300');
   inp.style('font-style', 'regular');
+
 }
 
 
@@ -157,19 +126,6 @@ function gotImage(result) {
 }
 
 function imageReady() {
-  //if (windowWidth <= 1918) {
-  //xImgPos = 1408;
-  //} else if ((windowWidth >= 1917) && (windowWidth <= 1662)) {
-  //xImgPos = 1152;
-  //}
-
-  if (windowWidth <= 1918) {
-    xImgPos = 1408;
-  } else if ((windowWidth >= 1917) && (windowWidth <= 1662)) {
-    xImgPos = 1152;
-  }
-
-
   yImgPos = h - 512;
   image(i, xImgPos, yImgPos, 512, 512);
 }
