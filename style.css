@@ -14,3 +14,5 @@ p {
   font-style: italic;
   z-index:-1;
 }
+
+document.body.style.overflow = 'hidden';

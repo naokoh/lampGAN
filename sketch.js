@@ -7,16 +7,18 @@ const model = new rw.HostedModel({
 let xImgPos = 896 + 512;
 let yImgPos;
 let inp, seed, col, colorT, title, myFont, gfx;
-var txt, startL, output, canvas, seis;
+var txt, startL, output, canvas, subtxtY, subtxtW;
 var w = window.innerWidth;
 var h = window.innerHeight;
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
-  seis = windowHeight / 6;
+  windowResized();
+  //createCanvas(windowWidth, windowHeight);
+  subtxtY = windowHeight / 6;
+  subtxtW = windowWidth / 4.5;
 
   title = createDiv("Lamp");
-  title.position(-20, seis * 2);
+  title.position(-20, subtxtY * 2);
   //title.style('translate', -100);
   title.style('z-index', '-1');
   title.style('font-size', '20vw');
@@ -43,8 +45,7 @@ function setup() {
 
   sub = createP("styleGAN trained on 1161 imgs of 20th Century");
   //sub.parent(title);
-  sub.position(windowWidth - 650, windowHeight - 100);
-  //sub.style('font-size', '1vw');
+  sub.position(subtxtW*3, windowHeight - 100);
   sub.style('line-height', 1.8);
   sub.style('text-indent', '0.35em');
   sub.style('color', '#696969');
@@ -88,10 +89,11 @@ function setup() {
 
 function windowResized() {
   const css = getComputedStyle(canvas.parentElement),
-    marginWidth = round(float(css.marginLeft) + float(css.marginRight)),
-    marginHeight = round(float(css.marginTop) + float(css.marginBottom)),
-    w = windowWidth - marginWidth,
-    h = windowHeight - marginHeight;
+        mw = float(css.marginLeft) + float(css.marginRight),
+        mh = float(css.marginTop)  + float(css.marginBottom),
+        ww = float(css.width)  || windowWidth,
+        wh = float(css.height) || windowHeight,
+        w = round(ww - mw), h = round(wh - mh);
 
   resizeCanvas(w, h, true);
 }
