@@ -4,22 +4,19 @@ const model = new rw.HostedModel({
   token: "Pth51OEDCjGDoEr2dDfAAw==",
 });
 
-let xImgPos = 896 + 512;
-let yImgPos;
+let xImgPos, yImgPos;
 let inp, seed, col, colorT, title, myFont, gfx;
 var txt, startL, output, canvas, subtxtY, subtxtW;
 var w = window.innerWidth;
 var h = window.innerHeight;
 
 function setup() {
-  windowResized();
-  //createCanvas(windowWidth, windowHeight);
+  createCanvas(windowWidth, windowHeight);
   subtxtY = windowHeight / 6;
   subtxtW = windowWidth / 4.5;
 
   title = createDiv("Lamp");
   title.position(-20, subtxtY * 2);
-  //title.style('translate', -100);
   title.style('z-index', '-1');
   title.style('font-size', '20vw');
   title.style('line-height', 0);
@@ -47,8 +44,6 @@ function setup() {
   //sub.parent(title2);
   sub.position(subtxtW * 3, windowHeight - 100);
   sub.style('line-height', 1.8);
-  //sub.style('text-indent', '87em');
-  //sub.style('font-size', '0.75vw');
   sub.style('color', '#696969');
   sub.style('font-family', 'Crimson Pro');
   sub.style('font-weight', '16');
@@ -58,7 +53,6 @@ function setup() {
   sub2 = createP("lamp designs for 16500 steps");
   sub2.parent(sub);
   sub2.position(0, 5);
-  //sub2.style('text-indent', '87em');
   sub2.style('line-height', 1.8);
   sub2.style('color', '#696969');
   sub2.style('font-family', 'Crimson Pro');
@@ -113,6 +107,19 @@ function draw() {
   inp.style('font-family', 'Crimson Pro');
   inp.style('font-weight', '300');
   inp.style('font-style', 'regular');
+
+  if (windowWidth > 1920) {
+    xImgPos = 1408;
+  } else if ((windowWidth < 1919) && (windowWidth > 1664)) {
+    xImgPos = 1152;
+  } else if ((windowWidth < 1663) && (windowWidth > 1408)) {
+    xImgPos = 896;
+  } else if ((windowWidth < 1407) && (windowWidth > 1152)) {
+    xImgPos = 640;
+  } else if ((windowWidth < 1151) && (windowWidth > 896)) {
+    xImgPos = 384;
+  }
+
 }
 
 
@@ -163,19 +170,6 @@ function gotImage(result) {
 }
 
 function imageReady() {
-  //if (windowWidth <= 1918) {
-  //xImgPos = 1408;
-  //} else if ((windowWidth >= 1917) && (windowWidth <= 1662)) {
-  //xImgPos = 1152;
-  //}
-
-  if (windowWidth <= 1918) {
-    xImgPos = 1408;
-  } else if ((windowWidth >= 1917) && (windowWidth <= 1662)) {
-    xImgPos = 1152;
-  }
-
-
   yImgPos = h - 512;
   image(i, xImgPos, yImgPos, 512, 512);
 }
