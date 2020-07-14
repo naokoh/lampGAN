@@ -1,18 +1,19 @@
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
 }
+
 canvas {
   display: block;
   left:0;
-  top:0;
-  z-index:-1;
+  top: 0;
+  z-index: -1;
 }
-p { 
+
+p {
   font-family: ff-meta-web-pro, sans-serif;
   font-weight: 200 !important;
   font-style: italic;
-  z-index:-1;
+  z-index: -1;
 }
-
-document.body.style.overflow = 'hidden';

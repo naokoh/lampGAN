@@ -44,10 +44,11 @@ function setup() {
   title2.style('user-select', 'none');
 
   sub = createP("styleGAN trained on 1161 imgs of 20th Century");
-  //sub.parent(title);
-  sub.position(subtxtW*3, windowHeight - 100);
+  //sub.parent(title2);
+  sub.position(subtxtW * 3, windowHeight - 100);
   sub.style('line-height', 1.8);
-  sub.style('text-indent', '0.35em');
+  //sub.style('text-indent', '87em');
+  //sub.style('font-size', '0.75vw');
   sub.style('color', '#696969');
   sub.style('font-family', 'Crimson Pro');
   sub.style('font-weight', '16');
@@ -57,8 +58,8 @@ function setup() {
   sub2 = createP("lamp designs for 16500 steps");
   sub2.parent(sub);
   sub2.position(0, 5);
+  //sub2.style('text-indent', '87em');
   sub2.style('line-height', 1.8);
-  sub2.style('text-indent', '0.35em');
   sub2.style('color', '#696969');
   sub2.style('font-family', 'Crimson Pro');
   sub2.style('font-weight', '16');
@@ -69,7 +70,7 @@ function setup() {
   //textSize(15);
   //textFont('Crimson Pro');
   //text("styleGAN trained on 1161 imgs of 20th Century\nlamp designs for 16500 steps",
-    //windowWidth - 631, windowHeight - 90, 384, 256);
+  //windowWidth - 631, windowHeight - 90, 384, 256);
 
 
   inp = createInput('');
@@ -88,14 +89,16 @@ function setup() {
 }
 
 function windowResized() {
-  const css = getComputedStyle(canvas.parentElement),
-        mw = float(css.marginLeft) + float(css.marginRight),
-        mh = float(css.marginTop)  + float(css.marginBottom),
-        ww = float(css.width)  || windowWidth,
-        wh = float(css.height) || windowHeight,
-        w = round(ww - mw), h = round(wh - mh);
+  resizeCanvas(windowWidth, windowHeight)
+}
 
-  resizeCanvas(w, h, true);
+function disableScroll() {
+  document.body.style.overflow = 'hidden';
+  document.querySelector('html').scrollTop = window.scrollY;
+}
+
+function enableScroll() {
+  document.body.style.overflow = null;
 }
 
 function draw() {
