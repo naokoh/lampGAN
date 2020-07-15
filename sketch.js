@@ -6,8 +6,7 @@ const model = new rw.HostedModel({
 
 let xImgPos, yImgPos;
 let inp, seed, col, colorT, title, myFont, gfx;
-var txt, startL, output, canvas, subtxtY, subtxtW;
-var w = window.innerWidth;
+var txt, startL, output, canvas, subtxtY, subtxtW, link, link2;
 var h = window.innerHeight;
 
 function setup() {
@@ -42,9 +41,9 @@ function setup() {
 
   sub = createP("styleGAN trained on 1161 imgs of 20th Century");
   //sub.parent(title2);
-  sub.position(subtxtW * 3, windowHeight - 100);
+  sub.position(subtxtW * 3, windowHeight - 130);
   sub.style('line-height', 1.8);
-  sub.style('color', '#696969');
+  sub.style('color', '#303030');
   sub.style('font-family', 'Crimson Pro');
   sub.style('font-weight', '16');
   sub.style('font-style', 'normal');
@@ -54,11 +53,19 @@ function setup() {
   sub2.parent(sub);
   sub2.position(0, 5);
   sub2.style('line-height', 1.8);
-  sub2.style('color', '#696969');
+  sub2.style('color', '#303030');
   sub2.style('font-family', 'Crimson Pro');
   sub2.style('font-weight', '16');
   sub2.style('font-style', 'normal');
   sub2.style('user-select', 'none');
+
+  link = createP("made with RunwayML _ a project by Naoko Hara");
+  link.parent(sub);
+  link.position(0, 40);
+  link.style('color', '#303030');
+  link.style('font-family', 'Crimson Pro');
+  link.style('font-size', '14px');
+  link.style('font-style', 'bold');
 
   //fill(150);
   //textSize(15);
@@ -75,24 +82,11 @@ function setup() {
   line(50, windowHeight - 150, windowWidth - 50, windowHeight - 150);
 
   startL = 128;
-  for (let x = 0; x < w; x++) {
+  for (let x = 0; x < windowWidth; x++) {
     line(startL, 50, startL, windowHeight - 50);
     startL += 256;
   }
 
-}
-
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight)
-}
-
-function disableScroll() {
-  document.body.style.overflow = 'hidden';
-  document.querySelector('html').scrollTop = window.scrollY;
-}
-
-function enableScroll() {
-  document.body.style.overflow = null;
 }
 
 function draw() {
@@ -121,7 +115,6 @@ function draw() {
   }
 
 }
-
 
 function gotText() {
   seed = 0;
